@@ -64,11 +64,11 @@
                                     <td class="text-center"><p class="text-xs font-weight-bold mb-0">{{ $m->marking_details_count }}</p></td>
                                     <td class="text-center"><p class="text-xs font-weight-bold mb-0">{{ $m->note ?? '-' }}</p></td>
                                     <td class="text-center">
-                                        <a href="{{ url('edit_marking', ['id' => Crypt::encrypt($m->id_marking_header)]) }}" class="mx-3 edit-button">
-                                            <i class="fas fa-user-edit text-secondary">edit</i>
+                                        <a href="{{ url('edit_marking', ['id' => Crypt::encrypt($m->id_marking_header)]) }}" class="mx-3 edit-button text-secondary font-weight-bold text-xs">
+                                            Edit
                                         </a>
-                                        <a href="{{ url('delete_marking', ['id' => Crypt::encrypt($m->id_marking_header)]) }}" class="mx-3 delete-button">
-                                            <i class="far fa-trash-alt text-secondary">delete</i>
+                                        <a href="{{ url('delete_marking', ['id' => Crypt::encrypt($m->id_marking_header)]) }}" class="mx-3 delete-button text-secondary font-weight-bold text-xs">
+                                            Delete
                                         </a>
                                     </td>
                                 </tr>

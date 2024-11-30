@@ -89,7 +89,7 @@
                                     </td>
                                     <td width="5%" class="align-middle text-center">
                                         <button type="button" class="btn btn-danger delete-row" style="margin-bottom: 0;" disabled>
-                                            <i class="far fa-trash-alt"></i>
+                                            D
                                         </button>
                                     </td>
                                 </tr>
@@ -144,7 +144,7 @@
                             </li>
                             <li class="list-group-item text-center mt-3">
                                 <button type="button" class="btn btn-danger delete-row" disabled>
-                                    <i class="far fa-trash-alt"></i>
+                                    D
                                 </button>
                             </li>
                         </ul>
@@ -249,7 +249,7 @@
                                     <td width="5%" class="align-middle text-center">
                                         <button type="button" class="btn btn-danger delete-row" data-id="{{ $md->id_marking_detail }}" 
                                             style="margin-bottom: 0;" {{ $index === 0 ? 'disabled' : '' }}>
-                                            <i class="far fa-trash-alt"></i>
+                                            D
                                         </button>
                                     </td>
                                 </tr>
@@ -294,7 +294,7 @@
                                 </li>
                                 <li class="list-group-item text-center mt-3">
                                     <button type="button" class="btn btn-danger delete-row-md" data-id="{{ $md->id_marking_detail }}" {{ $index === 0 ? 'disabled' : '' }}>
-                                        <i class="far fa-trash-alt"></i>
+                                        D
                                     </button>
                                 </li>
                             </ul>
@@ -434,7 +434,7 @@
                         </li>
                         <li class="list-group-item text-center mt-3">
                             <button type="button" class="btn btn-danger delete-row-md">
-                                <i class="far fa-trash-alt"></i>
+                                D
                             </button>
                         </li>
                     </ul>
@@ -464,7 +464,7 @@
                     <td class="align-middle text-center"><input type="text" name="note[]" class="form-control note"></td>
                     <td class="align-middle text-center">
                         <button type="button" class="btn btn-danger delete-row" style="margin-bottom: 0;">
-                            <i class="far fa-trash-alt"></i>
+                            D
                         </button>
                     </td>
                 `;
@@ -477,7 +477,33 @@
                 document.querySelector('#data-table tbody').appendChild(newRow);
             }
 
+            addDeleteRowListeners();
             updateRowNumbers();
+        }
+
+        // Fungsi untuk menghapus baris
+        function addDeleteRowListeners() {
+            // Desktop
+            document.querySelectorAll('.delete-row').forEach(button => {
+                button.addEventListener('click', function () {
+                    var row = this.closest('tr');
+                    if (row) {
+                        row.remove();
+                        updateRowNumbers();
+                    }
+                });
+            });
+
+            // Mobile
+            document.querySelectorAll('.delete-row-md').forEach(button => {
+                button.addEventListener('click', function () {
+                    var listGroup = this.closest('.list-group');
+                    if (listGroup) {
+                        listGroup.remove();
+                        updateRowNumbers();
+                    }
+                });
+            });
         }
 
         function toggleInputs() {
