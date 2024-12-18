@@ -27,10 +27,10 @@
                                         <input type="text" class="form-control" name="code_mark" placeholder="Code Marking" aria-label="Code Marking" 
                                         oninput="this.value = this.value.toUpperCase()" aria-describedby="Code Marking-addon">
                                     </div>
-                                    <label>Address (<span class="text-info text-gradient">Opsional</span>)</label>
+                                    <!-- <label>Address (<span class="text-info text-gradient">Opsional</span>)</label>
                                     <div class="input-group mb-3">
                                         <textarea class="form-control" name="address" placeholder="Address" aria-label="With textarea"></textarea>
-                                    </div>
+                                    </div> -->
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-round bg-gradient-primary btn-lg w-100 mt-4 mb-0">Submit</button>
                                     </div>
@@ -68,10 +68,10 @@
                                         <input type="text" class="form-control" name="code_mark" id="code_mark" placeholder="Code Marking" aria-label="Code Marking" 
                                         oninput="this.value = this.value.toUpperCase()" aria-describedby="Code Marking-addon">
                                     </div>
-                                    <label>Address (<span class="text-info text-gradient">Optional</span>)</label>
+                                    <!-- <label>Address (<span class="text-info text-gradient">Optional</span>)</label>
                                     <div class="input-group mb-3">
                                         <textarea class="form-control" name="address" id="address" placeholder="Address" aria-label="With textarea"></textarea>
-                                    </div>
+                                    </div> -->
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-round bg-gradient-secondary btn-lg w-100 mt-4 mb-0">Update</button>
                                     </div>
@@ -103,64 +103,110 @@
                 <div class="card-header pb-3">
                     <div class="d-flex flex-row justify-content-between">
                         <div>
-                            <h5 class="mb-0">All Customers</h5>
+                            <!-- Teks lebih kecil saat di perangkat mobile -->
+                            <h5 class="mb-0 d-none d-md-block">All Customers</h5>
+                            <h6 class="mb-0 d-block d-md-none">All Customers</h6>
                         </div>
-                        <a href="#" class="btn bg-gradient-primary btn-sm mb-0" type="button" data-bs-toggle="modal" data-bs-target="#modal-customer">
-                            +&nbsp; New Customer
+                        <!-- Tombol berubah menjadi ikon saja saat di perangkat mobile -->
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal-customer" 
+                        class="btn bg-gradient-primary btn-sm mb-0 d-none d-md-inline-block" 
+                        type="button">
+                            New Customer
+                        </a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal-customer"
+                        class="btn bg-gradient-primary btn-sm mb-0 d-inline-block d-md-none" 
+                        type="button">
+                            <i class="fas fa-plus"></i>
                         </a>
                     </div>
                 </div>
                 @if (count($customers) > 0)
                 <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table id="table-dataTable" class="table align-items-center mb-0">
-                            <thead>
+                    <!-- Tampilan Tabel untuk Perangkat Ukuran Desktop -->
+                    <div class="table-responsive p-0 d-none d-md-block">
+                        <table class="table align-items-center mb-0">
+                            <thead class="thead-light">
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        No.
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Name
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Code Marking
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Address
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Action
-                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Code Mark</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($customers as $c)
                                 <tr data-id="{{ $c->id_customer }}"
                                     data-name="{{ $c->name }}"
-                                    data-code_mark="{{ $c->code_mark }}"
-                                    data-address="{{ $c->address }}">
-                                    <td class="ps-4">
-                                        <p class="text-xs font-weight-bold mb-0">{{ $loop->iteration }}.</p>
-                                    </td>
+                                    data-code_mark="{{ $c->code_mark }}">
+                                    <td class="ps-4"><p class="text-xs font-weight-bold mb-0">{{ $loop->iteration }}.</p></td>
                                     <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">{{ $c->name }}</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{ $c->name ?? '-' }}</p>
                                     </td>
+                                    <td class="text-center"><p class="text-xs font-weight-bold mb-0">{{ $c->code_mark }}</p></td>
                                     <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">{{ $c->code_mark ?? '-' }}</p>
-                                    </td>
-                                    <td class="text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">{{ $c->address ?? '-' }}</span>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="#" class="mx-3 edit-button" data-bs-toggle="modal" data-bs-target="#modal-customer_edit" 
-                                            data-bs-toggle="tooltip" data-bs-original-title="Edit user">
-                                            <i class="fas fa-user-edit text-secondary"></i>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal-customer_edit" 
+                                        class="mx-3 edit-button text-secondary font-weight-bold text-xs">
+                                            Edit
                                         </a>
+                                        <!-- <a href="#" 
+                                        class="mx-3 delete-button text-secondary font-weight-bold text-xs">
+                                            Delete
+                                        </a> -->
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+
+                    <!-- Tampilan List untuk Perangkat Ukuran Mobile -->
+                    <div class="list-group d-block d-md-none">
+                        @foreach($customers as $c)
+                        <div class="list-group-item" 
+                            data-id="{{ $c->id_customer }}" 
+                            data-name="{{ $c->name }}" 
+                            data-code_mark="{{ $c->code_mark }}">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6 class="mb-1">No. {{ $loop->iteration }}</h6>
+                                    <p class="mb-1"><strong>Name:</strong> 
+                                        {{ $c->name }}
+                                    </p>
+                                    <p class="mb-1"><strong>Code Mark:</strong> {{ $c->code_mark }}</p>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <a href="#" class="mx-3 edit-button" data-bs-toggle="modal" data-bs-target="#modal-customer_edit">
+                                        <i class="fas fa-user-edit text-secondary"></i>
+                                    </a>
+                                    <!-- <a href="#" class="mx-3 delete-button">
+                                        <i class="far fa-trash-alt text-secondary"></i>
+                                    </a> -->
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+
+                    <div class="mt-5 d-flex justify-content-end">
+                        <ul class="pagination pagination-sm pagination-gutter px-4">
+                            <li class="page-item page-indicator {{ $customers->onFirstPage() ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ $customers->previousPageUrl() }}" aria-label="Previous">
+                                    <i class="fa fa-angle-left me-1"></i>
+                                </a>
+                            </li>
+
+                            @for ($i = 1; $i <= $customers->lastPage(); $i++)
+                                <li class="page-item {{ $customers->currentPage() == $i ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $customers->url($i) }}">{{ $i }}</a>
+                                </li>
+                            @endfor
+
+                            <li class="page-item page-indicator {{ $customers->hasMorePages() ? '' : 'disabled' }}">
+                                <a class="page-link" href="{{ $customers->nextPageUrl() }}" aria-label="Next">
+                                    <i class="fa fa-angle-right ms-1"></i>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 @else
@@ -187,17 +233,18 @@
             button.addEventListener("click", function(event) {
                 event.preventDefault();
 
-                var row = this.closest("tr");
-                var id = row.getAttribute("data-id");
-                var name = row.getAttribute("data-name");
-                var code_mark = row.getAttribute("data-code_mark");
-                var address = row.getAttribute("data-address");
+                // Deteksi elemen induk terdekat (baik untuk tabel maupun list group)
+                var parentElement = this.closest("tr") || this.closest(".list-group-item");
 
-                // Mengisi data ke dalam formulir
+                // Ambil atribut data dari elemen induk
+                var id = parentElement.getAttribute("data-id");
+                var name = parentElement.getAttribute("data-name");
+                var code_mark = parentElement.getAttribute("data-code_mark");
+
+                // Isi data ke dalam form modal
                 document.getElementById("id").value = id;
                 document.getElementById("name").value = name;
                 document.getElementById("code_mark").value = code_mark;
-                document.getElementById("address").value = address;
             });
         });
     });

@@ -9,11 +9,12 @@ use App\Models\Customer;
 use App\Models\Origin;
 use App\Models\Shipper;
 use App\Models\Unit;
+use App\Models\Tracking;
 use Illuminate\Support\Facades\Crypt;
 use PDF;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Milon\Barcode\DNS2D;
+use Milon\Barcode\DNS1D;
 
 class MarkingController extends Controller
 {
@@ -49,13 +50,22 @@ class MarkingController extends Controller
 
         $markingHeader = MarkingHeader::create($dataMain);
 
+        // Create data tracking
+        $dataTracking = [
+            'id_marking_header' => $markingHeader->id_marking_header,
+            'id_user' => $request->user,
+            'status' => 'Created',
+        ];
+
+        Tracking::create($dataTracking);
+
         foreach ($request->inner_marking as $index => $innerMarking) {
             $dataDetail = [
                 'id_marking_header' => $markingHeader->id_marking_header,
                 'inner_marking' => $innerMarking,
-                'qty' => $request->qty[$index],
-                'id_unit' => $request->id_unit[$index],
-                'note' => $request->note[$index],
+                'qty' => $request->qty[$index] ?? null,
+                'id_unit' => $request->id_unit[$index] ?? null,
+                'note' => $request->note[$index] ?? null,
             ];
             
             MarkingDetail::create($dataDetail);
@@ -131,18 +141,18 @@ class MarkingController extends Controller
         $units = Unit::all();
     
         // Generate barcode data combining marking header and details
-        $barcodeData = "ML: " . $markingHeader->outer_marking;
+        $barcodeData = 'B-' . (string) $markingHeader->id_marking_header;
         $individualBarcodes = [];
 
         foreach ($markingDetails as $detail) {
-            $individualBarcodeData = "ML: " . $markingHeader->outer_marking . "\n MD: " . $detail->inner_marking;
+            $individualBarcodeData = 'B-' . (string) $detail->id_marking_detail;
 
             // Generate barcode in Code 128 format and add it to the array
-            $individualBarcodes[] = (new DNS2D)->getBarcodePNG($individualBarcodeData, 'PDF417', 5, 3.5);
+            $individualBarcodes[] = (new DNS1D)->getBarcodePNG($individualBarcodeData, 'C128', '2', '50');
         }
 
         // Generate main barcode
-        $mainBarcode = (new DNS2D)->getBarcodePNG($barcodeData, 'PDF417', 5, 3.5);
+        $mainBarcode = (new DNS1D)->getBarcodePNG($barcodeData, 'C128', '2', '50');
     
         $data = [
             'markingHeader' => $markingHeader,
@@ -156,9 +166,11 @@ class MarkingController extends Controller
         $pdf = PDF::loadView('report.report_marking', $data)->setPaper([0, 0, 297.637, 297.637], 'portrait') ; // 10.5 x 10.5 thermal size in points
 
         // Update to is printed and print count
-        $markingHeader->is_printed = true;
-        $markingHeader->printcount += 1;
-        $markingHeader->save();
+        if ($markingHeader) {
+            $markingHeader->is_printed = true;
+            $markingHeader->printcount += 1;
+            $markingHeader->save();
+        }
     
         // Return PDF download or view
         return $pdf->stream('Data-Marking-' . $markingHeader->outer_marking . '-' . date('d M Y', strtotime($markingHeader->date)) . '.pdf');

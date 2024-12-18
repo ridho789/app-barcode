@@ -8,7 +8,7 @@ use App\Models\Origin;
 class OriginController extends Controller
 {
     public function index() {
-        $origins = Origin::orderBy('name')->get();
+        $origins = Origin::orderBy('name')->paginate(10);
         return view('main.origin', compact('origins'));
     }
 

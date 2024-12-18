@@ -8,7 +8,7 @@ use App\Models\Shipper;
 class ShippersController extends Controller
 {
     public function index() {
-        $shippers = Shipper::orderBy('name')->get();
+        $shippers = Shipper::orderBy('name')->paginate(10);
         return view('main.shipper', compact('shippers'));
     }
 
@@ -18,11 +18,14 @@ class ShippersController extends Controller
             'code_mark' => $request->code_mark
         ];
     
-        $existingShipper = Shipper::where('name', $request->name)->first();
+        $existingShipper = Shipper::where('name', $request->name)
+        ->where('code_mark', $request->code_mark)
+        ->first();
 
         if ($existingShipper) {
             $logErrors = 
-            'Shipper: ' . $request->name . ', already in the system.';
+            'Shipper: ' . $request->name . 
+            ' - Code Mark: ' . $request->code_mark . ', already in the system.';
 
             return redirect('shippers')->with('logErrors', $logErrors);
 

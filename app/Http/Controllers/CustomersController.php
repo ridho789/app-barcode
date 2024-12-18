@@ -8,7 +8,7 @@ use App\Models\Customer;
 class CustomersController extends Controller
 {
     public function index() {
-        $customers = Customer::orderBy('name')->get();
+        $customers = Customer::orderBy('name')->paginate(10);
         return view('main.customer', compact('customers'));
     }
 
@@ -16,17 +16,16 @@ class CustomersController extends Controller
         $dataCustomer = [
             'name' => $request->name,
             'code_mark' => $request->code_mark,
-            'address' => $request->address
         ];
     
         $existingCustomer = Customer::where('name', $request->name)
-        ->where('address', $request->address)
+        ->where('code_mark', $request->code_mark)
         ->first();
 
         if ($existingCustomer) {
             $logErrors = 
             'Customer: ' . $request->name . 
-            ' - Address: ' . $request->address . ', already in the system.';
+            ' - Code Mark: ' . $request->code_mark . ', already in the system.';
 
             return redirect('customers')->with('logErrors', $logErrors);
 
@@ -42,7 +41,6 @@ class CustomersController extends Controller
         if ($dataCustomer) {
             $dataCustomer->name = $request->name;
             $dataCustomer->code_mark = $request->code_mark;
-            $dataCustomer->address = $request->address;
             $dataCustomer->save();
         }
 

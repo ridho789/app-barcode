@@ -7,7 +7,7 @@
 		</a>
 	</div>
 	<hr class="horizontal dark mt-0">
-	<div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main">
+	<div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main" style="height: auto !important;">
 		<ul class="navbar-nav">
 			<li class="nav-item">
 				<a class="nav-link {{ (Request::is('dashboard') ? 'active' : '') }}" href="{{ url('dashboard') }}">
@@ -109,6 +109,14 @@
 					<span class="nav-link-text ms-1">Units</span>
 				</a>
 			</li>
+			<li class="nav-item pb-2">
+				<a class="nav-link {{ (Request::is('users') ? 'active' : '') }}" href="{{ url('users') }}">
+					<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+						<i class="fas fa-users" style="color: {{ Request::is('users') ? 'white' : 'black' }};"></i>
+					</div>
+					<span class="nav-link-text ms-1">Users</span>
+				</a>
+			</li>
 			<li class="nav-item mt-2">
 				<h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Management</h6>
 			</li>
@@ -130,6 +138,14 @@
 						</svg>
 					</div>
 					<span class="nav-link-text ms-1">Markings</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link {{ (Request::is('trackings') || Request::is('generate_marking') ? 'active' : '') }}" href="{{ url('trackings') }}">
+					<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+						<i class="fas fa-map-marker-alt" style="color: {{ Request::is('trackings') ? 'white' : 'black' }};"></i>
+					</div>
+					<span class="nav-link-text ms-1">Trackings</span>
 				</a>
 			</li>
 		</ul>

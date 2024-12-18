@@ -42,7 +42,7 @@
                 <div class="card-body px-0 pt-0 pb-2">
                     <!-- Tampilan Tabel untuk Perangkat Ukuran Desktop -->
                     <div class="table-responsive p-0 d-none d-md-block">
-                        <table class="table align-items-center mb-0">
+                        <table id="datatables" class="table align-items-center mb-0">
                             <thead class="thead-light">
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
@@ -104,7 +104,7 @@
                         @endforeach
                     </div>
 
-                    <div class="mt-5 d-flex justify-content-end">
+                    <div class="mt-5 d-flex d-md-none justify-content-end">
                         <ul class="pagination pagination-sm pagination-gutter px-4">
                             <li class="page-item page-indicator {{ $markings->onFirstPage() ? 'disabled' : '' }}">
                                 <a class="page-link" href="{{ $markings->previousPageUrl() }}" aria-label="Previous">
@@ -146,6 +146,20 @@
             placeholder: 'Select',
         });
     }
+
+    $(document).ready(function() {
+        var table = $('#datatables').DataTable({
+            "language": {
+                "lengthMenu": "Show _MENU_ entries",
+                "paginate": {
+                    "first": "First",
+                    "last": "Last",
+                    "next": "<i class='fa fa-angle-right ms-1'></i>",
+                    "previous": "<i class='fa fa-angle-left ms-1'></i>"
+                }
+            }
+        });
+    });
 
     document.addEventListener('DOMContentLoaded', function() {
         initializeSelect2('.select2');

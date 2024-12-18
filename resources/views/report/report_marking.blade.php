@@ -13,9 +13,9 @@
 </head>
 <body>
 
-    <div class="header">
-        <h1 style="color: red;">{{ $markingHeader->outer_marking }}</h1>
-        <p style="margin-top: -15px;">Main Marking</p>
+    <div class="header" style="margin-top: -45px;">
+        <p style="color: red; font-size:50px; font-weight:bold">{{ $markingHeader->outer_marking }}</p>
+        <p style="margin-top: -55px;">Main Marking</p>
     </div>
 
     @php
@@ -26,30 +26,30 @@
     @endphp
 
     <!-- {!! $barcode !!} -->
-    <div style="text-align: justify;">
-        <img src="data:image/png;base64,{{ $barcode }}" style="display: block; margin: 0 auto; width: 100%; height: auto;">
-    </div>
+    <img src="data:image/png;base64,{{ $barcode }}" style="display: block; margin: 0 auto; width: 100%; height: auto;">
 
-    <div class="header">
+    <h3 style="text-align: center; margin-top: 7.5px;">B-{{ $markingHeader->id_marking_header }}</h3>
+    <!-- <div class="header">
         <p>Created on: {{ $markingHeader->date ? \Carbon\Carbon::createFromFormat('Y-m-d', $markingHeader->date)->format('d M Y') : '-' }}</p>
-    </div>
+    </div> -->
 
     @foreach($markingDetails as $index => $detail)
 
         <div style="page-break-after: always;"></div>
         <div class="header">
-            <h1>{{ $markingHeader->outer_marking }}</h1>
-            <p style="margin-top: -15px;">Inner Marking: {{ $detail->inner_marking }}</p>
+            <p style="color: red; font-size:50px; font-weight:bold">{{ $markingHeader->outer_marking }}</p>
+            <p style="margin-top: -55px; font-size:medium">Inner Marking</p>
+            <p style="font-size:20px;">{{ $detail->inner_marking }}</p>
         </div>
 
         <!-- {!! $individualBarcodes[$index] !!} -->
-        <div style="text-align: justify;">
+        <!-- <div style="text-align: justify;">
             <img src="data:image/png;base64,{{ $individualBarcodes[$index] }}" style="display: block; margin: 0 auto; width: 100%; height: auto;">
-        </div>
+        </div> -->
 
-        <div class="header">
+        <!-- <div class="header">
             <p>Created on: {{ $markingHeader->date ? \Carbon\Carbon::createFromFormat('Y-m-d', $markingHeader->date)->format('d M Y') : '-' }}</p>
-        </div>
+        </div> -->
     @endforeach
 
 </body>

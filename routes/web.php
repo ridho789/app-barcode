@@ -11,7 +11,9 @@ use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\OriginController;
 use App\Http\Controllers\ShippersController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\MarkingController;
+use App\Http\Controllers\TrackingController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
@@ -70,6 +72,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('unit-store', [UnitController::class, 'store']);
 	Route::post('unit-update', [UnitController::class, 'update']);
 
+	// User
+	Route::get('users', [UserController::class, 'index']);
+	Route::post('user-store', [UserController::class, 'store']);
+	Route::post('user-update', [UserController::class, 'update']);
+
 	// Marking
 	Route::get('markings', [MarkingController::class, 'index']);
 	Route::get('create_marking', [MarkingController::class, 'create'])->name('Create Marking');
@@ -77,8 +84,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('edit_marking/{id}', [MarkingController::class, 'edit'])->name('Edit Marking');
 	Route::post('marking-update', [MarkingController::class, 'update']);
 	Route::get('delete_marking/{id}', [MarkingController::class, 'delete']);
-	Route::get('/print-marking-details/{id}', [MarkingController::class, 'print']);
+	Route::get('/print-marking/{id}', [MarkingController::class, 'print']);
 	Route::get('/delete-marking-detail/{id}', [MarkingController::class, 'deleteDetail']);
+
+	//Tracking
+	Route::get('trackings', [TrackingController::class, 'index']);
+	Route::post('tracking-in', [TrackingController::class, 'in']);
+	Route::post('tracking-out', [TrackingController::class, 'out']);
 });
 
 Route::group(['middleware' => 'guest'], function () {

@@ -95,31 +95,34 @@
                 <div class="card-header pb-3">
                     <div class="d-flex flex-row justify-content-between">
                         <div>
-                            <h5 class="mb-0">All Shippers</h5>
+                            <!-- Teks lebih kecil saat di perangkat mobile -->
+                            <h5 class="mb-0 d-none d-md-block">All Shippers</h5>
+                            <h6 class="mb-0 d-block d-md-none">All Shippers</h6>
                         </div>
-                        <a href="#" class="btn bg-gradient-primary btn-sm mb-0" type="button" data-bs-toggle="modal" data-bs-target="#modal-shipper">
-                            +&nbsp; New Shipper
+                        <!-- Tombol berubah menjadi ikon saja saat di perangkat mobile -->
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal-shipper" 
+                        class="btn bg-gradient-primary btn-sm mb-0 d-none d-md-inline-block" 
+                        type="button">
+                            New Shipper
+                        </a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal-shipper"
+                        class="btn bg-gradient-primary btn-sm mb-0 d-inline-block d-md-none" 
+                        type="button">
+                            <i class="fas fa-plus"></i>
                         </a>
                     </div>
                 </div>
                 @if (count($shippers) > 0)
                 <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
+                    <!-- Tampilan Tabel untuk Perangkat Ukuran Desktop -->
+                    <div class="table-responsive p-0 d-none d-md-block">
                         <table class="table align-items-center mb-0">
-                            <thead>
+                            <thead class="thead-light">
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        No.
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Shipper
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Code Marking
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Action
-                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Code Mark</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -127,25 +130,75 @@
                                 <tr data-id="{{ $s->id_shipper }}"
                                     data-name="{{ $s->name }}"
                                     data-code_mark="{{ $s->code_mark }}">
-                                    <td class="ps-4">
-                                        <p class="text-xs font-weight-bold mb-0">{{ $loop->iteration }}.</p>
-                                    </td>
+                                    <td class="ps-4"><p class="text-xs font-weight-bold mb-0">{{ $loop->iteration }}.</p></td>
                                     <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">{{ $s->name }}</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{ $s->name ?? '-' }}</p>
                                     </td>
+                                    <td class="text-center"><p class="text-xs font-weight-bold mb-0">{{ $s->code_mark }}</p></td>
                                     <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">{{ $s->code_mark ?? '-' }}</p>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="#" class="mx-3 edit-button" data-bs-toggle="modal" data-bs-target="#modal-shipper_edit" 
-                                            data-bs-toggle="tooltip" data-bs-original-title="Edit user">
-                                            <i class="fas fa-user-edit text-secondary"></i>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal-shipper_edit" 
+                                        class="mx-3 edit-button text-secondary font-weight-bold text-xs">
+                                            Edit
                                         </a>
+                                        <!-- <a href="#" 
+                                        class="mx-3 delete-button text-secondary font-weight-bold text-xs">
+                                            Delete
+                                        </a> -->
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+
+                    <!-- Tampilan List untuk Perangkat Ukuran Mobile -->
+                    <div class="list-group d-block d-md-none">
+                        @foreach($shippers as $s)
+                        <div class="list-group-item" 
+                            data-id="{{ $s->id_shipper }}" 
+                            data-name="{{ $s->name }}" 
+                            data-code_mark="{{ $s->code_mark }}">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6 class="mb-1">No. {{ $loop->iteration }}</h6>
+                                    <p class="mb-1"><strong>Name:</strong> 
+                                        {{ $s->name }}
+                                    </p>
+                                    <p class="mb-1"><strong>Code Mark:</strong> {{ $s->code_mark }}</p>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <a href="#" class="mx-3 edit-button" data-bs-toggle="modal" data-bs-target="#modal-shipper_edit">
+                                        <i class="fas fa-user-edit text-secondary"></i>
+                                    </a>
+                                    <!-- <a href="#" class="mx-3 delete-button">
+                                        <i class="far fa-trash-alt text-secondary"></i>
+                                    </a> -->
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+
+                    <div class="mt-5 d-flex justify-content-end">
+                        <ul class="pagination pagination-sm pagination-gutter px-4">
+                            <li class="page-item page-indicator {{ $shippers->onFirstPage() ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ $shippers->previousPageUrl() }}" aria-label="Previous">
+                                    <i class="fa fa-angle-left me-1"></i>
+                                </a>
+                            </li>
+
+                            @for ($i = 1; $i <= $shippers->lastPage(); $i++)
+                                <li class="page-item {{ $shippers->currentPage() == $i ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $shippers->url($i) }}">{{ $i }}</a>
+                                </li>
+                            @endfor
+
+                            <li class="page-item page-indicator {{ $shippers->hasMorePages() ? '' : 'disabled' }}">
+                                <a class="page-link" href="{{ $shippers->nextPageUrl() }}" aria-label="Next">
+                                    <i class="fa fa-angle-right ms-1"></i>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 @else
@@ -166,12 +219,15 @@
             button.addEventListener("click", function(event) {
                 event.preventDefault();
 
-                var row = this.closest("tr");
-                var id = row.getAttribute("data-id");
-                var name = row.getAttribute("data-name");
-                var code_mark = row.getAttribute("data-code_mark");
+                // Deteksi elemen induk terdekat (baik untuk tabel maupun list group)
+                var parentElement = this.closest("tr") || this.closest(".list-group-item");
 
-                // Mengisi data ke dalam formulir
+                // Ambil atribut data dari elemen induk
+                var id = parentElement.getAttribute("data-id");
+                var name = parentElement.getAttribute("data-name");
+                var code_mark = parentElement.getAttribute("data-code_mark");
+
+                // Isi data ke dalam form modal
                 document.getElementById("id").value = id;
                 document.getElementById("name").value = name;
                 document.getElementById("code_mark").value = code_mark;

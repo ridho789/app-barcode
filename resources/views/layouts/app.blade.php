@@ -37,6 +37,7 @@
 	<link href="{{ asset('') }}assets/css/nucleo-svg.css" rel="stylesheet" />
 	<!-- Font Awesome Icons -->
 	<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 	<link href="{{ asset('') }}assets/css/nucleo-svg.css" rel="stylesheet" />
 	<!-- CSS Files -->
 	<link id="pagestyle" href="{{ asset('') }}assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
@@ -44,10 +45,9 @@
 	<!-- Select2 -->
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-	<!-- DataTables CSS -->
-	<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"> -->
-
-	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"> -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 
 	<!-- <style>
         .select2-container--default .select2-selection--single {
@@ -67,6 +67,23 @@
             border-radius: 0px;
         }
     </style> -->
+	
+	<style>
+		.dataTables_info {
+			font-size: 14px;
+			color: #6c757d;
+			margin-top: 10px;
+		}
+
+		.dataTables_filter {
+			float: right;
+		}
+
+		.dataTables_filter input {
+			width: 200px;
+			padding: 5px;
+		}
+	</style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100 {{ (\Request::is('rtl') ? 'rtl' : (Request::is('virtual-reality') ? 'virtual-reality' : '')) }} ">
@@ -92,9 +109,7 @@
 	<script src="{{ asset('') }}assets/js/plugins/smooth-scrollbar.min.js"></script>
 	<script src="{{ asset('') }}assets/js/plugins/fullcalendar.min.js"></script>
 	<script src="{{ asset('') }}assets/js/plugins/chartjs.min.js"></script>
-	<script src="{{ asset('') }}assets/js/core/jquery-3.7.1.min.js"></script>
 	<script src="{{ asset('') }}assets/js/core/choices.min.js"></script>
-	<!-- <script src="{{ asset('') }}assets/js/plugins/datatables.min.js"></script> -->
 
 	@stack('rtl')
 	@stack('dashboard')

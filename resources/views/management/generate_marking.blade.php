@@ -12,6 +12,7 @@
                 @if ($markingHeader == null)
                 <form role="form text-left" action="{{ url('marking-store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" id="user" name="user" value="{{ auth()->user()->id }}">
                     <div class="row align-items-center">
                         <div class="col-12 col-md-6">
                             <h5 class="font-weight-bolder d-inline-block mb-0">Main Marking</h5>
@@ -39,7 +40,8 @@
                         </div>
                         <div class="col-12 col-md-3">
                             <label>Code Mark</label>
-                            <input class="form-control" type="text" name="code_mark" placeholder="Code Mark" required>
+                            <input class="form-control" type="text" name="code_mark" placeholder="Code Mark" 
+                            oninput="this.value = this.value.toUpperCase()" required>
                         </div>
                         <div class="col-12 col-md-6">
                             <label>Note</label>
@@ -89,7 +91,7 @@
                                     </td>
                                     <td width="5%" class="align-middle text-center">
                                         <button type="button" class="btn btn-danger delete-row" style="margin-bottom: 0;" disabled>
-                                            D
+                                            <i class="far fa-trash-alt"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -144,7 +146,7 @@
                             </li>
                             <li class="list-group-item text-center mt-3">
                                 <button type="button" class="btn btn-danger delete-row" disabled>
-                                    D
+                                    <i class="far fa-trash-alt"></i>
                                 </button>
                             </li>
                         </ul>
@@ -168,13 +170,16 @@
                 <form role="form text-left" action="{{ url('marking-update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" id="edit-id" name="id_marking_header" value="{{ $markingHeader->id_marking_header }}">
-                    <div class="row align-items-center">
+                    <div class="row align-items-center mb-2">
                         <div class="col-12 col-md-6">
                             <h5 class="font-weight-bolder d-inline-block mb-0">Main Marking</h5>
                         </div>
                         <div class="col-12 col-md-6 text-md-end">
                             @if ($markingHeader->updated_at)
                             <p class="font-weight-bolder text-sm mb-0">Last Updated: {{ \Carbon\Carbon::parse($markingHeader->updated_at)->addHours(7)->format('d M Y H:i') }}</p>
+                            @if ($markingHeader->printcount)
+                            <p class="font-weight-bolder text-sm mb-0">Printed {{ $markingHeader->printcount }} times</p>
+                            @endif
                             @else
                             <p class="font-weight-bolder text-sm mb-0">Created at: {{ \Carbon\Carbon::parse($markingHeader->created_at)->addHours(7)->format('d M Y H:i') }}</p>
                             @endif
@@ -199,7 +204,8 @@
                         </div>
                         <div class="col-12 col-md-3">
                             <label>Code Mark</label>
-                            <input class="form-control" type="text" name="code_mark" value="{{ $markingHeader->outer_marking }}" placeholder="Code Mark" required>
+                            <input class="form-control" type="text" name="code_mark" value="{{ $markingHeader->outer_marking }}" placeholder="Code Mark" 
+                            oninput="this.value = this.value.toUpperCase()" required>
                         </div>
                         <div class="col-12 col-md-6">
                             <label>Note</label>
@@ -249,7 +255,7 @@
                                     <td width="5%" class="align-middle text-center">
                                         <button type="button" class="btn btn-danger delete-row" data-id="{{ $md->id_marking_detail }}" 
                                             style="margin-bottom: 0;" {{ $index === 0 ? 'disabled' : '' }}>
-                                            D
+                                                <i class="far fa-trash-alt"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -294,7 +300,7 @@
                                 </li>
                                 <li class="list-group-item text-center mt-3">
                                     <button type="button" class="btn btn-danger delete-row-md" data-id="{{ $md->id_marking_detail }}" {{ $index === 0 ? 'disabled' : '' }}>
-                                        D
+                                        <i class="far fa-trash-alt"></i>
                                     </button>
                                 </li>
                             </ul>
@@ -345,10 +351,11 @@
 
     const printButton = document.getElementById('print-button');
     if (printButton) {
-        printButton.addEventListener('click', function () {
+        printButton.addEventListener('click', function (event) {
+            event.preventDefault();
             const markingHeaderId = this.getAttribute('data-id');
             if (markingHeaderId) {
-                window.open(`/print-marking-details/${markingHeaderId}`, '_blank');
+                window.open(`/print-marking/${markingHeaderId}`, '_blank');
             }
         });
     }
@@ -434,7 +441,7 @@
                         </li>
                         <li class="list-group-item text-center mt-3">
                             <button type="button" class="btn btn-danger delete-row-md">
-                                D
+                                <i class="far fa-trash-alt"></i>
                             </button>
                         </li>
                     </ul>
@@ -464,7 +471,7 @@
                     <td class="align-middle text-center"><input type="text" name="note[]" class="form-control note"></td>
                     <td class="align-middle text-center">
                         <button type="button" class="btn btn-danger delete-row" style="margin-bottom: 0;">
-                            D
+                            <i class="far fa-trash-alt"></i>
                         </button>
                     </td>
                 `;

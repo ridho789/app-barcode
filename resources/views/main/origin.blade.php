@@ -85,50 +85,107 @@
                 <div class="card-header pb-3">
                     <div class="d-flex flex-row justify-content-between">
                         <div>
-                            <h5 class="mb-0">All Origins</h5>
+                            <!-- Teks lebih kecil saat di perangkat mobile -->
+                            <h5 class="mb-0 d-none d-md-block">All Origins</h5>
+                            <h6 class="mb-0 d-block d-md-none">All Origins</h6>
                         </div>
-                        <a href="#" class="btn bg-gradient-primary btn-sm mb-0" type="button" data-bs-toggle="modal" data-bs-target="#modal-origin">
-                            +&nbsp; New Origin
+                        <!-- Tombol berubah menjadi ikon saja saat di perangkat mobile -->
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal-origin" 
+                        class="btn bg-gradient-primary btn-sm mb-0 d-none d-md-inline-block" 
+                        type="button">
+                            New Origin
+                        </a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal-origin"
+                        class="btn bg-gradient-primary btn-sm mb-0 d-inline-block d-md-none" 
+                        type="button">
+                            <i class="fas fa-plus"></i>
                         </a>
                     </div>
                 </div>
                 @if (count($origins) > 0)
                 <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
+                    <!-- Tampilan Tabel untuk Perangkat Ukuran Desktop -->
+                    <div class="table-responsive p-0 d-none d-md-block">
                         <table class="table align-items-center mb-0">
-                            <thead>
+                            <thead class="thead-light">
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        No.
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Origin
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Action
-                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($origins as $o)
                                 <tr data-id="{{ $o->id_origin }}"
-                                    data-name="{{ $o->name }}">
-                                    <td class="ps-4">
-                                        <p class="text-xs font-weight-bold mb-0">{{ $loop->iteration }}.</p>
+                                    data-name="{{ $o->name }}"
+                                    data-code_mark="{{ $o->code_mark }}">
+                                    <td class="ps-4"><p class="text-xs font-weight-bold mb-0">{{ $loop->iteration }}.</p></td>
+                                    <td class="text-center">
+                                        <p class="text-xs font-weight-bold mb-0">{{ $o->name ?? '-' }}</p>
                                     </td>
                                     <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">{{ $o->name }}</p>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="#" class="mx-3 edit-button" data-bs-toggle="modal" data-bs-target="#modal-origin_edit" 
-                                            data-bs-toggle="tooltip" data-bs-original-title="Edit user">
-                                            <i class="fas fa-user-edit text-secondary"></i>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal-origin_edit" 
+                                        class="mx-3 edit-button text-secondary font-weight-bold text-xs">
+                                            Edit
                                         </a>
+                                        <!-- <a href="#" 
+                                        class="mx-3 delete-button text-secondary font-weight-bold text-xs">
+                                            Delete
+                                        </a> -->
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+
+                    <!-- Tampilan List untuk Perangkat Ukuran Mobile -->
+                    <div class="list-group d-block d-md-none">
+                        @foreach($origins as $o)
+                        <div class="list-group-item" 
+                            data-id="{{ $o->id_origin }}" 
+                            data-name="{{ $o->name }}" 
+                            data-code_mark="{{ $o->code_mark }}">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6 class="mb-1">No. {{ $loop->iteration }}</h6>
+                                    <p class="mb-1"><strong>Name:</strong> 
+                                        {{ $o->name }}
+                                    </p>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <a href="#" class="mx-3 edit-button" data-bs-toggle="modal" data-bs-target="#modal-origin_edit">
+                                        <i class="fas fa-user-edit text-secondary"></i>
+                                    </a>
+                                    <!-- <a href="#" class="mx-3 delete-button">
+                                        <i class="far fa-trash-alt text-secondary"></i>
+                                    </a> -->
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+
+                    <div class="mt-5 d-flex justify-content-end">
+                        <ul class="pagination pagination-sm pagination-gutter px-4">
+                            <li class="page-item page-indicator {{ $origins->onFirstPage() ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ $origins->previousPageUrl() }}" aria-label="Previous">
+                                    <i class="fa fa-angle-left me-1"></i>
+                                </a>
+                            </li>
+
+                            @for ($i = 1; $i <= $origins->lastPage(); $i++)
+                                <li class="page-item {{ $origins->currentPage() == $i ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $origins->url($i) }}">{{ $i }}</a>
+                                </li>
+                            @endfor
+
+                            <li class="page-item page-indicator {{ $origins->hasMorePages() ? '' : 'disabled' }}">
+                                <a class="page-link" href="{{ $origins->nextPageUrl() }}" aria-label="Next">
+                                    <i class="fa fa-angle-right ms-1"></i>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 @else
@@ -149,11 +206,14 @@
             button.addEventListener("click", function(event) {
                 event.preventDefault();
 
-                var row = this.closest("tr");
-                var id = row.getAttribute("data-id");
-                var name = row.getAttribute("data-name");
+                // Deteksi elemen induk terdekat (baik untuk tabel maupun list group)
+                var parentElement = this.closest("tr") || this.closest(".list-group-item");
 
-                // Mengisi data ke dalam formulir
+                // Ambil atribut data dari elemen induk
+                var id = parentElement.getAttribute("data-id");
+                var name = parentElement.getAttribute("data-name");
+
+                // Isi data ke dalam form modal
                 document.getElementById("id").value = id;
                 document.getElementById("name").value = name;
             });

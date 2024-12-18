@@ -8,14 +8,13 @@ use App\Models\Unit;
 class UnitController extends Controller
 {
     public function index() {
-        $units = Unit::orderBy('name')->get();
+        $units = Unit::orderBy('name')->paginate(10);
         return view('main.unit', compact('units'));
     }
 
     public function store(Request $request) {
         $dataUnit = [
             'name' => $request->name,
-            'code_mark' => $request->code_mark
         ];
     
         $existingUnit = Unit::where('name', $request->name)->first();
