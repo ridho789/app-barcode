@@ -126,7 +126,7 @@
             <div class="card-body px-0 pt-0 pb-2">
                 <!-- Tampilan Tabel untuk Perangkat Ukuran Desktop -->
                 <div class="table-responsive p-0 d-none d-md-block">
-                    <table id="datatables" class="table align-items-center mb-0">
+                    <table id="datatables" class="table align-items-center mb-3">
                         <thead class="thead-light">
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>

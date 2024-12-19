@@ -83,6 +83,12 @@
 			width: 200px;
 			padding: 5px;
 		}
+
+		.dataTables_paginate {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
 	</style>
 </head>
 
