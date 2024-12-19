@@ -10,7 +10,7 @@ use App\Models\User;
 class TrackingController extends Controller
 {
     public function index() {
-        $trackings = Tracking::orderBy('created_at', 'desc')->paginate(50);
+        $trackings = Tracking::orderBy('created_at', 'desc')->get();
         $markingHeader = MarkingHeader::pluck('outer_marking', 'id_marking_header');
         $userName = User::pluck('name', 'id');
         return view('management.tracking', compact('trackings', 'markingHeader', 'userName'));

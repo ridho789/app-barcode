@@ -78,7 +78,7 @@
                     </div>
 
                     <!-- Tampilan List untuk Perangkat Ukuran Mobile -->
-                    <div class="list-group d-block d-md-none">
+                    <div id="item-container" class="list-group d-block d-md-none">
                         @foreach($markings as $m)
                         <div class="list-group-item">
                             <div class="d-flex justify-content-between">
@@ -104,22 +104,15 @@
                         @endforeach
                     </div>
 
-                    <div class="mt-5 d-flex d-md-none justify-content-end">
+                    <div id="pagination-controls" class="mt-5 d-flex d-md-none justify-content-end">
                         <ul class="pagination pagination-sm pagination-gutter px-4">
-                            <li class="page-item page-indicator {{ $markings->onFirstPage() ? 'disabled' : '' }}">
-                                <a class="page-link" href="{{ $markings->previousPageUrl() }}" aria-label="Previous">
+                            <li class="page-item disabled" id="prev-btn">
+                                <a class="page-link" href="javascript:void(0)" aria-label="Previous">
                                     <i class="fa fa-angle-left me-1"></i>
                                 </a>
                             </li>
-
-                            @for ($i = 1; $i <= $markings->lastPage(); $i++)
-                                <li class="page-item {{ $markings->currentPage() == $i ? 'active' : '' }}">
-                                    <a class="page-link" href="{{ $markings->url($i) }}">{{ $i }}</a>
-                                </li>
-                            @endfor
-
-                            <li class="page-item page-indicator {{ $markings->hasMorePages() ? '' : 'disabled' }}">
-                                <a class="page-link" href="{{ $markings->nextPageUrl() }}" aria-label="Next">
+                            <li class="page-item disabled" id="next-btn">
+                                <a class="page-link" href="javascript:void(0)" aria-label="Next">
                                     <i class="fa fa-angle-right ms-1"></i>
                                 </a>
                             </li>
@@ -163,6 +156,49 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         initializeSelect2('.select2');
+
+        var items = document.querySelectorAll("#item-container .list-group-item");
+        var itemsPerPage = 25;
+        var currentPage = 1;
+        var totalPages = Math.ceil(items.length / itemsPerPage);
+
+        function renderPage(page) {
+            var start = (page - 1) * itemsPerPage;
+            var end = page * itemsPerPage;
+            var itemsToDisplay = Array.from(items).slice(start, end);
+
+            // Menyembunyikan semua item
+            items.forEach(function(item) {
+                item.style.display = "none";
+            });
+
+            // Menampilkan item untuk halaman saat ini
+            itemsToDisplay.forEach(function(item) {
+                item.style.display = "block";
+            });
+
+            // Menampilkan navigasi halaman
+            document.getElementById("prev-btn").classList.toggle("disabled", page <= 1);
+            document.getElementById("next-btn").classList.toggle("disabled", page >= totalPages);
+        }
+
+        // Tombol "Previous" dan "Next"
+        document.getElementById("prev-btn").addEventListener("click", function() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderPage(currentPage);
+            }
+        });
+
+        document.getElementById("next-btn").addEventListener("click", function() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderPage(currentPage);
+            }
+        });
+
+        // Render halaman pertama
+        renderPage(currentPage);
     });
 </script>
 @endsection

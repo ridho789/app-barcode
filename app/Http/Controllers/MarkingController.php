@@ -19,7 +19,7 @@ use Milon\Barcode\DNS1D;
 class MarkingController extends Controller
 {
     public function index() {
-        $markings = MarkingHeader::withCount('markingDetails')->orderBy('date', 'desc')->orderBy('outer_marking')->paginate(50);
+        $markings = MarkingHeader::withCount('markingDetails')->orderBy('date', 'desc')->orderBy('outer_marking')->get();
         $customers = Customer::orderBy('name')->get();
         $origins = Origin::orderBy('name')->get();
         $shippers = Shipper::orderBy('name')->get();
