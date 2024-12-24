@@ -15,6 +15,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MarkingController;
 use App\Http\Controllers\TrackingController;
 
+use App\Http\Controllers\ModbusController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
@@ -91,6 +93,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('trackings', [TrackingController::class, 'index']);
 	Route::post('tracking-in', [TrackingController::class, 'in']);
 	Route::post('tracking-out', [TrackingController::class, 'out']);
+
+	// Modbus
+	Route::get('modbus', [ModbusController::class, 'index']);
+	Route::get('/modbus', [ModbusController::class, 'showForm'])->name('modbus.form');
+	Route::post('/modbus/read', [ModbusController::class, 'readData'])->name('modbus.read');
+	Route::get('/debug-com-ports', [ModbusController::class, 'debugComPorts']);
 });
 
 Route::group(['middleware' => 'guest'], function () {
