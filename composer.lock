@@ -4,8 +4,57 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6784e2b968c5e11d46702f6a488d56c2",
+    "content-hash": "68374c5ce62b2a82a469748805537635",
     "packages": [
+        {
+            "name": "aldas/modbus-tcp-client",
+            "version": "3.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aldas/modbus-tcp-client.git",
+                "reference": "b18323bf5bb2abb531d97d6f385bafb3a6c0c658"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aldas/modbus-tcp-client/zipball/b18323bf5bb2abb531d97d6f385bafb3a6c0c658",
+                "reference": "b18323bf5bb2abb531d97d6f385bafb3a6c0c658",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.10.50",
+                "phpunit/phpunit": "^9.6.15",
+                "psr/log": "^1.1.4",
+                "react/child-process": "^0.6.5",
+                "react/datagram": "^1.9",
+                "react/socket": "^1.15"
+            },
+            "suggest": {
+                "psr/log": "Required for using the Log middleware with BinaryStreamConnection"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ModbusTcpClient\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Modbus TCP protocol client library",
+            "keywords": [
+                "modbus"
+            ],
+            "support": {
+                "issues": "https://github.com/aldas/modbus-tcp-client/issues",
+                "source": "https://github.com/aldas/modbus-tcp-client/tree/3.5.1"
+            },
+            "time": "2024-03-10T12:44:20+00:00"
+        },
         {
             "name": "bacon/bacon-qr-code",
             "version": "2.0.8",
@@ -781,16 +830,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "4.0.2",
+            "version": "4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "ebaaf5be6c0286928352e054f2d5125608e5405e"
+                "reference": "b115554301161fa21467629f1e1391c1936de517"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/ebaaf5be6c0286928352e054f2d5125608e5405e",
-                "reference": "ebaaf5be6c0286928352e054f2d5125608e5405e",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/b115554301161fa21467629f1e1391c1936de517",
+                "reference": "b115554301161fa21467629f1e1391c1936de517",
                 "shasum": ""
             },
             "require": {
@@ -836,7 +885,7 @@
             ],
             "support": {
                 "issues": "https://github.com/egulias/EmailValidator/issues",
-                "source": "https://github.com/egulias/EmailValidator/tree/4.0.2"
+                "source": "https://github.com/egulias/EmailValidator/tree/4.0.3"
             },
             "funding": [
                 {
@@ -844,7 +893,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-06T06:47:41+00:00"
+            "time": "2024-12-27T00:36:43+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -2407,6 +2456,52 @@
             "time": "2024-12-08T08:18:47+00:00"
         },
         {
+            "name": "lepiaf/serialport",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lepiaf/serialport.git",
+                "reference": "17e9ff0fb2f373986a22918a995699b9fe688ba7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lepiaf/serialport/zipball/17e9ff0fb2f373986a22918a995699b9fe688ba7",
+                "reference": "17e9ff0fb2f373986a22918a995699b9fe688ba7",
+                "shasum": ""
+            },
+            "require-dev": {
+                "php-mock/php-mock-phpunit": "^2.6",
+                "phpunit/phpunit": "^9.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "lepiaf\\SerialPort\\": "src/lepiaf/SerialPort"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thierry Thuon",
+                    "email": "lepiaf@users.noreply.github.com"
+                }
+            ],
+            "description": "Serial port access convenience class",
+            "support": {
+                "issues": "https://github.com/lepiaf/serialport/issues",
+                "source": "https://github.com/lepiaf/serialport/tree/v1.1.0"
+            },
+            "time": "2020-10-31T02:46:36+00:00"
+        },
+        {
             "name": "masterminds/html5",
             "version": "2.9.0",
             "source": {
@@ -2652,16 +2747,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "3.8.3",
+            "version": "3.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "f01cfa96468f4c38325f507ab81a4f1d2cd93cfe"
+                "reference": "129700ed449b1f02d70272d2ac802357c8c30c58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/f01cfa96468f4c38325f507ab81a4f1d2cd93cfe",
-                "reference": "f01cfa96468f4c38325f507ab81a4f1d2cd93cfe",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/129700ed449b1f02d70272d2ac802357c8c30c58",
+                "reference": "129700ed449b1f02d70272d2ac802357c8c30c58",
                 "shasum": ""
             },
             "require": {
@@ -2754,7 +2849,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-21T18:03:19+00:00"
+            "time": "2024-12-27T09:25:35+00:00"
         },
         {
             "name": "nette/schema",
@@ -4305,12 +4400,12 @@
             },
             "type": "library",
             "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
                 "branch-alias": {
                     "dev-main": "3.5-dev"
-                },
-                "thanks": {
-                    "name": "symfony/contracts",
-                    "url": "https://github.com/symfony/contracts"
                 }
             },
             "autoload": {
@@ -4528,12 +4623,12 @@
             },
             "type": "library",
             "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
                 "branch-alias": {
                     "dev-main": "3.5-dev"
-                },
-                "thanks": {
-                    "name": "symfony/contracts",
-                    "url": "https://github.com/symfony/contracts"
                 }
             },
             "autoload": {
@@ -5806,12 +5901,12 @@
             },
             "type": "library",
             "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
                 "branch-alias": {
                     "dev-main": "3.5-dev"
-                },
-                "thanks": {
-                    "name": "symfony/contracts",
-                    "url": "https://github.com/symfony/contracts"
                 }
             },
             "autoload": {
@@ -6066,12 +6161,12 @@
             },
             "type": "library",
             "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
                 "branch-alias": {
                     "dev-main": "3.5-dev"
-                },
-                "thanks": {
-                    "name": "symfony/contracts",
-                    "url": "https://github.com/symfony/contracts"
                 }
             },
             "autoload": {
