@@ -79,20 +79,21 @@ class ModbusController extends Controller
             'com_port' => 'nullable|string',
         ]);
 
-        $deviceAddress = $validated['device_address'];
-        $slaveId = $validated['slave_id'];
-        $startAddress = $validated['start_address'];
-        $registerCount = $validated['register_count'];
-        $connectionType = $validated['connection_type'];
-        $port = $validated['port'] ?? 502;
-        $comPort = $validated['com_port'] ?? null;
-
         try {
             // Initialize Modbus connection
-            $modbus = $this->initializeConnection($connectionType, $deviceAddress, $port, $comPort);
+            $modbus = $this->initializeConnection(
+                $validated['connection_type'],
+                $validated['device_address'],
+                $validated['port'] ?? 502,
+                $validated['com_port'] ?? null
+            );
 
             // Send Modbus request
-            $request = new ReadHoldingRegistersRequest($startAddress, $registerCount, $slaveId);
+            $request = new ReadHoldingRegistersRequest(
+                $validated['start_address'],
+                $validated['register_count'],
+                $validated['slave_id']
+            );
             $binaryData = $modbus->connect()->sendAndReceive($request);
 
             // Parse response
