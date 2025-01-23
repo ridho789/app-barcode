@@ -15,7 +15,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MarkingController;
 use App\Http\Controllers\TrackingController;
 
-use App\Http\Controllers\ModbusController;
+use App\Http\Controllers\ModBusController;
+use App\Http\Controllers\ScaleController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
@@ -95,10 +96,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('tracking-out', [TrackingController::class, 'out']);
 
 	// Modbus
-	Route::get('modbus', [ModbusController::class, 'index']);
-	Route::get('/modbus', [ModbusController::class, 'showForm'])->name('modbus.form');
-	Route::post('/modbus/read', [ModbusController::class, 'readData'])->name('modbus.read');
-	Route::get('/debug-com-ports', [ModbusController::class, 'debugComPorts']);
+	// Route::get('modbus', [ModBusController::class, 'index']);
+	// Route::get('/modbus', [ModBusController::class, 'showForm'])->name('modbus.form');
+	// Route::post('/modbus/read', [ModBusController::class, 'readData'])->name('modbus.read');
+	// Route::get('/debug-com-ports', [ModBusController::class, 'debugComPorts']);
+
+	// Scale
+	Route::get('scale', [ScaleController::class, 'index']);
+	Route::post('scale-read', [ScaleController::class, 'read']);
 });
 
 Route::group(['middleware' => 'guest'], function () {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "68374c5ce62b2a82a469748805537635",
+    "content-hash": "a019ad5ac4668d7653b3c3642424949c",
     "packages": [
         {
             "name": "aldas/modbus-tcp-client",
@@ -111,16 +111,16 @@
         },
         {
             "name": "barryvdh/laravel-dompdf",
-            "version": "v3.0.1",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-dompdf.git",
-                "reference": "d2b3a158ba6e6c0fbb97208aa37dc764642ce5d5"
+                "reference": "8d698b4aec2be91fe1e47ba71ba258acbf23357d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-dompdf/zipball/d2b3a158ba6e6c0fbb97208aa37dc764642ce5d5",
-                "reference": "d2b3a158ba6e6c0fbb97208aa37dc764642ce5d5",
+                "url": "https://api.github.com/repos/barryvdh/laravel-dompdf/zipball/8d698b4aec2be91fe1e47ba71ba258acbf23357d",
+                "reference": "8d698b4aec2be91fe1e47ba71ba258acbf23357d",
                 "shasum": ""
             },
             "require": {
@@ -172,7 +172,7 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-dompdf/issues",
-                "source": "https://github.com/barryvdh/laravel-dompdf/tree/v3.0.1"
+                "source": "https://github.com/barryvdh/laravel-dompdf/tree/v3.1.0"
             },
             "funding": [
                 {
@@ -184,7 +184,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-30T10:10:17+00:00"
+            "time": "2025-01-21T20:24:00+00:00"
         },
         {
             "name": "brick/math",
@@ -610,16 +610,16 @@
         },
         {
             "name": "dompdf/dompdf",
-            "version": "v3.0.2",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dompdf/dompdf.git",
-                "reference": "baf4084b27c7f4b5b7a221b19a94d11327664eb8"
+                "reference": "a51bd7a063a65499446919286fb18b518177155a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/baf4084b27c7f4b5b7a221b19a94d11327664eb8",
-                "reference": "baf4084b27c7f4b5b7a221b19a94d11327664eb8",
+                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/a51bd7a063a65499446919286fb18b518177155a",
+                "reference": "a51bd7a063a65499446919286fb18b518177155a",
                 "shasum": ""
             },
             "require": {
@@ -668,9 +668,9 @@
             "homepage": "https://github.com/dompdf/dompdf",
             "support": {
                 "issues": "https://github.com/dompdf/dompdf/issues",
-                "source": "https://github.com/dompdf/dompdf/tree/v3.0.2"
+                "source": "https://github.com/dompdf/dompdf/tree/v3.1.0"
             },
-            "time": "2024-12-27T20:27:37+00:00"
+            "time": "2025-01-15T14:09:04+00:00"
         },
         {
             "name": "dompdf/php-font-lib",
@@ -1440,17 +1440,59 @@
             "time": "2023-12-03T19:50:20+00:00"
         },
         {
-            "name": "laravel/framework",
-            "version": "v11.37.0",
+            "name": "hyperthese/php-serial",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "6cb103d2024b087eae207654b3f4b26646119ba5"
+                "url": "https://github.com/Xowap/PHP-Serial.git",
+                "reference": "69f31b281654f845134c9424d5656af28170d2e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/6cb103d2024b087eae207654b3f4b26646119ba5",
-                "reference": "6cb103d2024b087eae207654b3f4b26646119ba5",
+                "url": "https://api.github.com/repos/Xowap/PHP-Serial/zipball/69f31b281654f845134c9424d5656af28170d2e6",
+                "reference": "69f31b281654f845134c9424d5656af28170d2e6",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GNU GPLv2"
+            ],
+            "authors": [
+                {
+                    "name": "Rémy Sanchez",
+                    "email": "remy.sanchez@hyperthese.net"
+                }
+            ],
+            "description": "Multi-platform serial port access convenience class",
+            "support": {
+                "issues": "https://github.com/Xowap/PHP-Serial/issues",
+                "source": "https://github.com/Xowap/PHP-Serial/tree/master"
+            },
+            "time": "2014-02-21T00:24:39+00:00"
+        },
+        {
+            "name": "laravel/framework",
+            "version": "v11.39.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "996c96955f78e8a2b26a24c490a1721cfb14574f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/996c96955f78e8a2b26a24c490a1721cfb14574f",
+                "reference": "996c96955f78e8a2b26a24c490a1721cfb14574f",
                 "shasum": ""
             },
             "require": {
@@ -1651,20 +1693,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-01-02T20:10:21+00:00"
+            "time": "2025-01-21T15:02:43+00:00"
         },
         {
             "name": "laravel/prompts",
-            "version": "v0.3.2",
+            "version": "v0.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/prompts.git",
-                "reference": "0e0535747c6b8d6d10adca8b68293cf4517abb0f"
+                "reference": "749395fcd5f8f7530fe1f00dfa84eb22c83d94ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/prompts/zipball/0e0535747c6b8d6d10adca8b68293cf4517abb0f",
-                "reference": "0e0535747c6b8d6d10adca8b68293cf4517abb0f",
+                "url": "https://api.github.com/repos/laravel/prompts/zipball/749395fcd5f8f7530fe1f00dfa84eb22c83d94ea",
+                "reference": "749395fcd5f8f7530fe1f00dfa84eb22c83d94ea",
                 "shasum": ""
             },
             "require": {
@@ -1708,9 +1750,9 @@
             "description": "Add beautiful and user-friendly forms to your command-line applications.",
             "support": {
                 "issues": "https://github.com/laravel/prompts/issues",
-                "source": "https://github.com/laravel/prompts/tree/v0.3.2"
+                "source": "https://github.com/laravel/prompts/tree/v0.3.3"
             },
-            "time": "2024-11-12T14:59:47+00:00"
+            "time": "2024-12-30T15:53:31+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -6837,16 +6879,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.39.1",
+            "version": "v1.40.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "1a3c7291bc88de983b66688919a4d298d68ddec7"
+                "reference": "237e70656d8eface4839de51d101284bd5d0cf71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/1a3c7291bc88de983b66688919a4d298d68ddec7",
-                "reference": "1a3c7291bc88de983b66688919a4d298d68ddec7",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/237e70656d8eface4839de51d101284bd5d0cf71",
+                "reference": "237e70656d8eface4839de51d101284bd5d0cf71",
                 "shasum": ""
             },
             "require": {
@@ -6896,7 +6938,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2024-11-27T15:42:28+00:00"
+            "time": "2025-01-13T16:57:11+00:00"
         },
         {
             "name": "mockery/mockery",

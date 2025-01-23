@@ -148,6 +148,14 @@
 					<span class="nav-link-text ms-1">Trackings</span>
 				</a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link {{ (Request::is('scale') || Request::is('generate_marking') ? 'active' : '') }}" href="{{ url('scale') }}">
+					<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+						<i class="fas fa-cogs" style="color: {{ Request::is('scale') ? 'white' : 'black' }};"></i>
+					</div>
+					<span class="nav-link-text ms-1">Scale</span>
+				</a>
+			</li>
 		</ul>
 	</div>
 </aside>

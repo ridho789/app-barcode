@@ -12,6 +12,7 @@
         "aldas/modbus-tcp-client": "^3.5",
         "barryvdh/laravel-dompdf": "^3.0",
         "guzzlehttp/guzzle": "^7.4",
+        "hyperthese/php-serial": "^1.0",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.6",
