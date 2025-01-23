@@ -6,7 +6,7 @@
     @if (session('success'))
     <div class="row">
         <div class="col-12">
-            <div class="alert alert-success">
+            <div class="alert alert-success mx-4">
                 <strong>Success:</strong> {{ session('success') }}
             </div>
         </div>
@@ -16,7 +16,7 @@
     @if (session('error'))
     <div class="row">
         <div class="col-12">
-            <div class="alert alert-danger">
+            <div class="alert alert-danger mx-4">
                 <strong>Error:</strong> {{ session('error') }}
             </div>
         </div>
